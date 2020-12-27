@@ -1,5 +1,7 @@
 class Sudoku {
     // The board data structure is a 2D array
+    /*
+    // Incomplete board
     private static int[][] board = 
                 {{5, 3, 0, 0, 7, 0, 0, 0, 0},
                  {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -10,12 +12,38 @@ class Sudoku {
                  {0, 6, 0, 0, 0, 0, 2, 8, 0},
                  {0, 0, 0, 4, 1, 9, 0, 0, 5},
                  {0, 0, 0, 0, 8, 0, 0, 7, 9}};
+    */
+
+    // Completed board
+    private static int[][] board =
+                {{5, 3, 4, 6, 7, 8, 9, 1, 2},
+                 {6, 7, 2, 1, 9, 5, 3, 4, 8},
+                 {1, 9, 8, 3, 4, 2, 5, 6, 7},
+                 {8, 5, 9, 7, 6, 1, 4, 2, 3},
+                 {4, 2, 6, 8, 5, 3, 7, 9, 1},
+                 {7, 1, 3, 9, 2, 4, 8, 5, 6},
+                 {9, 6, 1, 5, 3, 7, 2, 8, 4},
+                 {2, 8, 7, 4, 1, 9, 6, 3, 5},
+                 {3, 4, 5, 2, 8, 6, 1, 7, 9}};
     
     public static void main(String[] args){
         displayBoard();
         System.out.println("Row: " + checkRow());
         System.out.println("Col: " + checkCol());
         System.out.println("3x3: " + check3X3());
+        System.out.println("Don: " + isDone());
+    }
+
+    public static boolean isDone(){
+        // Checking whether the board is completed
+        for (int r = 0; r < 9; ++r){
+            for (int c = 0; c < 9; ++c){
+                if (board[r][c] == 0){
+                    return false;
+                }
+            }
+        }
+        return checkRow() && checkCol() && check3X3();
     }
 
     public static boolean check3X3(){

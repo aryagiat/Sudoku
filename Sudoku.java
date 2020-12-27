@@ -13,25 +13,28 @@ class Sudoku {
     
     public static void main(String[] args){
         displayBoard();
-        System.out.println(checkRow());
+        System.out.println("Row: " + checkRow());
+        System.out.println("Col: " + checkCol());
     }
 
-    public static void displayBoard(){
-        // Display the board.
-        for (int r  = 0; r < 9; ++r){
-            if (r % 3 == 0){
-                System.out.println("-------------------------");
-            }
-            for (int c = 0; c < 9; ++c){
-                if (c % 3 == 0){
-                    System.out.print("| ");
+    public static boolean checkCol(){
+        // Checking validity of all columns
+        // Check validity using an array
+        for (int c = 0; c < 9; ++c){
+            int [] check = new int[10];
+            for (int r = 0; r < 9; ++r){
+                int num = board[r][c];
+                //System.out.println("R: " + r + "  C: " + c + " Num: " + num + "  Check: " + check[num]);
+                if (num > 0 && check[num] > 0){
+                    return false;
+                } else {
+                    check[num] = check[num] + 1;
                 }
-                System.out.print(board[r][c] + " ");
             }
-            System.out.print("|\n");
         }
-        System.out.println("-------------------------");
+        return true;
     }
+
 
     public static boolean checkRow(){
         // Checking validity of all rows
@@ -51,4 +54,20 @@ class Sudoku {
         return true;
     }
 
+    public static void displayBoard(){
+        // Display the board.
+        for (int r  = 0; r < 9; ++r){
+            if (r % 3 == 0){
+                System.out.println("-------------------------");
+            }
+            for (int c = 0; c < 9; ++c){
+                if (c % 3 == 0){
+                    System.out.print("| ");
+                }
+                System.out.print(board[r][c] + " ");
+            }
+            System.out.print("|\n");
+        }
+        System.out.println("-------------------------");
+    }
 }

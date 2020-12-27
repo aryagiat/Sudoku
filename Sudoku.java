@@ -1,8 +1,19 @@
 class Sudoku {
-    private static int[][] board = new int[9][9]; 
+    // The board data structure is a 2D array
+    private static int[][] board = 
+                {{5, 3, 0, 0, 7, 0, 0, 0, 0},
+                 {6, 0, 0, 1, 9, 5, 0, 0, 0},
+                 {0, 9, 8, 0, 0, 0, 0, 6, 0},
+                 {8, 0, 0, 0, 6, 0, 0, 0, 3},
+                 {4, 0, 0, 8, 0, 3, 0, 0, 1},
+                 {7, 0, 0, 0, 2, 0, 0, 0, 6},
+                 {0, 6, 0, 0, 0, 0, 2, 8, 0},
+                 {0, 0, 0, 4, 1, 9, 0, 0, 5},
+                 {0, 0, 0, 0, 8, 0, 0, 7, 9}};
     
     public static void main(String[] args){
         displayBoard();
+        System.out.println(checkRow());
     }
 
     public static void displayBoard(){
@@ -21,4 +32,23 @@ class Sudoku {
         }
         System.out.println("-------------------------");
     }
+
+    public static boolean checkRow(){
+        // Checking validity of all rows
+        // Check validity using an array
+        for (int r = 0; r < 9; ++r){
+            int [] check = new int[10];
+            for (int c = 0; c < 9; ++c){
+                int num = board[r][c];
+                //System.out.println("R: " + r + "  C: " + c + " Num: " + num + "  Check: " + check[num]);
+                if (num > 0 && check[num] > 0){
+                    return false;
+                } else {
+                    check[num] = check[num] + 1;
+                }
+            }
+        }
+        return true;
+    }
+
 }

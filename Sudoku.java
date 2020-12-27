@@ -15,7 +15,29 @@ class Sudoku {
         displayBoard();
         System.out.println("Row: " + checkRow());
         System.out.println("Col: " + checkCol());
+        System.out.println("3x3: " + check3X3());
     }
+
+    public static boolean check3X3(){
+        // Checking validity of all 3x3 boxes
+        for (int box = 0; box < 9; ++box){
+            int [] check = new int[10];
+            int sr = box < 3 ? 0 : box < 6 ? 3 : 6;
+            int sc = (box % 3) * 3;
+            for (int r = 0; r < 3; ++r){
+                for (int c = 0; c < 3; ++c){
+                    int num = board[r + sr][c + sc];
+                    if (num > 0 && check[num] > 0){
+                        return false;
+                    } else {
+                        check[num] = check[num] + 1;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+                    
 
     public static boolean checkCol(){
         // Checking validity of all columns
